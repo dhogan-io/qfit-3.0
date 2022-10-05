@@ -778,8 +778,7 @@ class QFitRotamericResidue(_BaseQFit):
         start_coor = atom.coor[0]  # We are working on a single atom.
         torsion_solutions = []
         for amplitude, direction in itertools.product(amplitudes, directions):
-            delta = self.prng.uniform(-sigma, sigma)
-            endpoint = start_coor + (amplitude + delta) * direction
+            endpoint = start_coor + amplitude * direction
             optimize_result = optimizer.optimize(atom_name, endpoint)
             torsion_solutions.append(optimize_result['x'])
 
@@ -1755,11 +1754,11 @@ class QFitCovalentLigand(_BaseQFit):
         sigma = self.options.sample_backbone_sigma
 
         for amplitude, direction in itertools.product(amplitudes, directions):
-            endpoint = start_coor + (amplitude + sigma * self.prng.random()) * direction
+            endpoint = start_coor + amplitude * direction
             optimize_result = optimizer.optimize(atom_name, endpoint)
             torsion_solutions.append(optimize_result['x'])
 
-            endpoint = start_coor - (amplitude + sigma * self.prng.random()) * direction
+            endpoint = start_coor - amplitude * direction
             optimize_result = optimizer.optimize(atom_name, endpoint)
             torsion_solutions.append(optimize_result['x'])
 
