@@ -1186,7 +1186,7 @@ class QFitSegment(_BaseQFit):
                     combine = True
                     for fragment2 in fragments:
                         if calc_rmsd(fragment.coor, fragment2.coor) < self.options.rmsd_cutoff:
-                             combine = False
+                            combine = False
                             break
                     if combine:
                         fragments.append(fragment)
